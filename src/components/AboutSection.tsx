@@ -40,7 +40,7 @@ const AboutSection = () => {
           >
             <div className="relative h-[400px] md:h-[500px]">
               <img 
-                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=800&h=600" 
+                src="https://i.imgur.com/URbIVPU.jpeg" 
                 alt="C.T.Ibéricos installation project" 
                 className="absolute inset-0 w-full h-full object-cover rounded-tl-3xl rounded-br-3xl shadow-lg"
               />

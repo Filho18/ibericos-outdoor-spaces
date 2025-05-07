@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Umbrella, Tent, Blinds, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,28 +8,28 @@ const services = [
     title: "Toldos",
     description: "Soluções elegantes e duráveis de proteção solar para terraços, varandas e jardins, disponíveis em diversos modelos e materiais.",
     icon: Umbrella,
-    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=800&h=600"
+    image: "https://i.imgur.com/35bdTwn.jpeg"
   },
   {
     id: 2,
     title: "Pérgolas Bioclimáticas",
     description: "Estruturas inovadoras que se adaptam às condições climatéricas, criando espaços exteriores confortáveis durante todo o ano.",
     icon: Tent,
-    image: "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&q=80&w=800&h=600"
+    image: "https://i.imgur.com/zOHhAaH.jpeg"
   },
   {
     id: 3,
     title: "Cortinas de Vidro",
     description: "Sistemas de fechamento em vidro que protegem espaços exteriores sem obstruir a vista, perfeitos para varandas e terraços.",
     icon: Blinds,
-    image: "https://images.unsplash.com/photo-1439337153520-7082a56a81f4?auto=format&fit=crop&q=80&w=800&h=600"
+    image: "https://i.imgur.com/7AnkBRP.jpeg"
   },
   {
     id: 4,
     title: "Estores de Rolo",
     description: "Proteção solar elegante e funcional para interiores e exteriores, com opções de automação e diversos tecidos e designs.",
     icon: Blinds,
-    image: "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&q=80&w=800&h=600"
+    image: "https://i.imgur.com/7AnkBRP.jpeg"
   }
 ];
 

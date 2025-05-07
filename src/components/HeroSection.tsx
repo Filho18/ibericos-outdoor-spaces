@@ -41,7 +41,7 @@ const HeroSection = () => {
           <div className="order-1 lg:order-2">
             <div className="rounded-2xl overflow-hidden shadow-xl h-[350px] md:h-[450px] animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <img 
-                src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=600" 
+                src="https://i.imgur.com/hVxOJ5Q.jpeg" 
                 alt="C.T.Ibéricos outdoor installation example" 
                 className="w-full h-full object-cover"
               />

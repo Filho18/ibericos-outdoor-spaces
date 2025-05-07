@@ -37,8 +37,11 @@ const Header = () => {
       <div className="container-custom flex items-center justify-between">
         <div className="text-2xl font-heading font-semibold">
           <a href="#" className="flex items-center">
-            <span className="text-iberico-700">C.T.</span>
-            <span className="text-iberico-500">Ibéricos</span>
+            <img 
+              src="https://i.imgur.com/E6AwRuY.png" 
+              alt="C.T.Ibéricos Logo" 
+              className="h-10 mr-2"
+            />
           </a>
         </div>
 
