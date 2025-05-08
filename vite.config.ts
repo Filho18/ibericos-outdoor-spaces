@@ -6,7 +6,6 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/ibericos-outdoor-spaces/',
   server: {
     host: "::",
     port: 8080,
