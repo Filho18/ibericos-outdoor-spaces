@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import ContactInfo from './contact/ContactInfo';
 import ContactForm from './contact/ContactForm';
@@ -42,7 +41,7 @@ const ContactSection = () => {
     <section id="contact" className="section-padding" ref={sectionRef}>
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Title and Description - Shown on all devices */}
+          {/* Título, descrição e formulário */}
           <div 
             className={`transition-all duration-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -58,7 +57,7 @@ const ContactSection = () => {
               consigo brevemente, ou utilize um dos nossos outros canais de comunicação.
             </p>
 
-            {/* Contact Form - First priority */}
+            {/* Formulário de contacto */}
             <div 
               className={`transition-all duration-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -67,8 +66,8 @@ const ContactSection = () => {
               <ContactForm />
             </div>
 
-            {/* Collapsible Contact Info - For mobile and tablet */}
-            <div className={`mt-8 ${isMobile ? 'block' : 'hidden lg:block'}`}>
+            {/* Contact Info colapsável para todos os dispositivos */}
+            <div className="mt-8">
               <Collapsible
                 open={isContactInfoOpen}
                 onOpenChange={setIsContactInfoOpen}
@@ -86,18 +85,6 @@ const ContactSection = () => {
                   <ContactInfo />
                 </CollapsibleContent>
               </Collapsible>
-            </div>
-          </div>
-
-          {/* Desktop Contact Info - Shown only on desktop */}
-          <div 
-            className={`hidden lg:block transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100 h-full">
-              <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Os Nossos Contactos</h3>
-              <ContactInfo />
             </div>
           </div>
         </div>
