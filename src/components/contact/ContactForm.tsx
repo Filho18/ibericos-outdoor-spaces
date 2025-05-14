@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const ContactForm = () => {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-      <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Peça um Orçamento</h3>
+      <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Peça um Orçamento Ou Escreva a Sua Dúvida</h3>
       
       <form 
         action="https://formspree.io/f/mzzryezk" 
