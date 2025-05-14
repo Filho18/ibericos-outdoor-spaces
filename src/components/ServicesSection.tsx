@@ -1,6 +1,8 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { Umbrella, Tent, Blinds, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const services = [
   {
@@ -37,6 +39,7 @@ const ServicesSection = () => {
   const [activeService, setActiveService] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -87,6 +90,45 @@ const ServicesSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Mobile Image (above service list) - Only visible on mobile */}
+          {isMobile && (
+            <div 
+              className={`col-span-1 mb-6 transition-all duration-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
+              <div className="relative h-[300px] rounded-lg overflow-hidden shadow-xl">
+                {services.map((service) => (
+                  <div
+                    key={service.id}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      activeService === service.id ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <img 
+                      src={service.image} 
+                      alt={service.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
+                      <h3 className="text-white text-2xl font-semibold mb-2">{service.title}</h3>
+                      <Button 
+                        asChild
+                        variant="outline" 
+                        className="w-fit bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm"
+                      >
+                        <a href="#contact">
+                          Peça um Orçamento
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div 
             className={`lg:col-span-1 transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -129,8 +171,9 @@ const ServicesSection = () => {
             </div>
           </div>
 
+          {/* Desktop Image (right side of service list) - Only visible on desktop */}
           <div 
-            className={`lg:col-span-2 transition-all duration-1000 delay-500 ${
+            className={`lg:col-span-2 transition-all duration-1000 delay-500 hidden lg:block ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
