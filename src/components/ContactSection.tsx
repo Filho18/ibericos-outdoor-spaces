@@ -1,9 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import ContactInfo from './contact/ContactInfo';
+import ContactForm from './contact/ContactForm';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,86 +48,7 @@ const ContactSection = () => {
               consigo brevemente, ou utilize um dos nossos outros canais de comunicação.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="bg-iberico-100 p-3 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-iberico-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-iberico-800">Morada</h3>
-                  <p className="text-iberico-700">
-                    Rua do Relógio de Sol, 71<br />
-                    Bairro Monte do Trigo<br />
-                    São Domingos de Rana, Portugal
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-iberico-100 p-3 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-iberico-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-iberico-800">Telefones</h3>
-                  <p className="text-iberico-700">
-                    214 450 284<br />
-                    214 450 233
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-iberico-100 p-3 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-iberico-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-iberico-800">Email</h3>
-                  <a href="mailto:casadostoldos@gmail.com" className="text-iberico-600 hover:text-iberico-800 transition-colors">
-                    casadostoldos@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-iberico-100 p-3 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-iberico-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-iberico-800">Horário de Funcionamento</h3>
-                  <p className="text-iberico-700">
-                    Segunda a Sexta: 9h às 18h<br />
-                    Sábado: 9h às 13h<br />
-                    Domingo: Fechado
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <Button
-                  asChild 
-                  variant="default"
-                  className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
-                >
-                  <a 
-                    href="https://wa.me/351962703371" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                    Fale Connosco via WhatsApp
-                  </a>
-                </Button>
-              </div>
-            </div>
+            <ContactInfo />
           </div>
 
           <div 
@@ -137,18 +56,7 @@ const ContactSection = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-              <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Peça um Orçamento</h3>
-              
-              <form action="https://formsubmit.co/el/jegaso" method="POST" className="space-y-4">
-                <input type="hidden" name="_next" value="https://meusite.com/sucesso" />
-                <input type="hidden" name="_captcha" value="false" />
-                <Input type="text" name="nome" placeholder="Seu nome" required />
-                <Input type="email" name="email" placeholder="Seu e-mail" required />
-                <Textarea name="mensagem" placeholder="Sua mensagem" required />
-                <Button type="submit" className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6">Enviar</Button>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </div>
