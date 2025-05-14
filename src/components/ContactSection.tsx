@@ -140,74 +140,13 @@ const ContactSection = () => {
             <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
               <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Peça um Orçamento</h3>
               
-              <form
-                action="https://formsubmit.co/el/jegaso"
-                method="POST"
-                className="space-y-6"
-              >
+              <form action="https://formsubmit.co/el/jegaso" method="POST" className="space-y-4">
+                <input type="hidden" name="_next" value="https://meusite.com/sucesso" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://teusite.com/sucesso" />
-
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-iberico-800 mb-1">
-                    Nome Completo *
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="O seu nome"
-                    required
-                    className="w-full"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-iberico-800 mb-1">
-                    Email *
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="O seu email"
-                    required
-                    className="w-full"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-iberico-800 mb-1">
-                    Telefone *
-                  </label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    placeholder="O seu telefone"
-                    required
-                    className="w-full"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-iberico-800 mb-1">
-                    Mensagem *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Descreva o seu projeto ou dúvida"
-                    required
-                    rows={5}
-                    className="w-full"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6"
-                >
-                  Enviar Mensagem
-                </Button>
+                <Input type="text" name="nome" placeholder="Seu nome" required />
+                <Input type="email" name="email" placeholder="Seu e-mail" required />
+                <Textarea name="mensagem" placeholder="Sua mensagem" required />
+                <Button type="submit" className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6">Enviar</Button>
               </form>
             </div>
           </div>
