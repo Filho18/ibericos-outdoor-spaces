@@ -4,18 +4,10 @@ import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,31 +30,6 @@ const ContactSection = () => {
       observer.disconnect();
     };
   }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success("Mensagem enviada com sucesso! Entraremos em contacto brevemente.");
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-      });
-      setIsSubmitting(false);
-    }, 1500);
-  };
 
   return (
     <section id="contact" className="section-padding" ref={sectionRef}>
@@ -173,7 +140,14 @@ const ContactSection = () => {
             <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
               <h3 className="text-2xl font-semibold mb-6 text-iberico-800">Peça um Orçamento</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                action="https://formsubmit.co/el/jegaso"
+                method="POST"
+                className="space-y-6"
+              >
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="https://teusite.com/sucesso" />
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-iberico-800 mb-1">
                     Nome Completo *
@@ -181,8 +155,6 @@ const ContactSection = () => {
                   <Input
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     placeholder="O seu nome"
                     required
                     className="w-full"
@@ -197,8 +169,6 @@ const ContactSection = () => {
                     id="email"
                     name="email"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     placeholder="O seu email"
                     required
                     className="w-full"
@@ -212,8 +182,6 @@ const ContactSection = () => {
                   <Input
                     id="phone"
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
                     placeholder="O seu telefone"
                     required
                     className="w-full"
@@ -227,8 +195,6 @@ const ContactSection = () => {
                   <Textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     placeholder="Descreva o seu projeto ou dúvida"
                     required
                     rows={5}
@@ -238,10 +204,9 @@ const ContactSection = () => {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
                   className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6"
                 >
-                  {isSubmitting ? "A Enviar..." : "Enviar Mensagem"}
+                  Enviar Mensagem
                 </Button>
               </form>
             </div>
