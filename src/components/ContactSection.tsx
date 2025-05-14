@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import ContactInfo from './contact/ContactInfo';
 import ContactForm from './contact/ContactForm';
-import { 
+import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger
@@ -40,24 +40,22 @@ const ContactSection = () => {
   return (
     <section id="contact" className="section-padding" ref={sectionRef}>
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Título, descrição e formulário */}
+        <div className="flex justify-center">
           <div 
-            className={`transition-all duration-1000 ${
+            className={`w-full lg:w-2/3 transition-all duration-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            } ${isMobile ? 'col-span-1' : ''}`}
+            }`}
           >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-iberico-800">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-iberico-800 text-center">
               Entre em Contacto
             </h2>
-            <div className="h-1 w-20 bg-iberico-500 mb-6"></div>
-            
-            <p className="text-iberico-700 mb-8">
+            <div className="h-1 w-20 bg-iberico-500 mb-6 mx-auto"></div>
+
+            <p className="text-iberico-700 mb-8 text-center">
               Tem alguma questão ou deseja solicitar um orçamento? Preencha o formulário e entraremos em contacto
               consigo brevemente, ou utilize um dos nossos outros canais de comunicação.
             </p>
 
-            {/* Formulário de contacto */}
             <div 
               className={`transition-all duration-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -66,7 +64,6 @@ const ContactSection = () => {
               <ContactForm />
             </div>
 
-            {/* Contact Info colapsável para todos os dispositivos */}
             <div className="mt-8">
               <Collapsible
                 open={isContactInfoOpen}
