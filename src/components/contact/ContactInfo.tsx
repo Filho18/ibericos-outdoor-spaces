@@ -66,12 +66,13 @@ const ContactInfo = () => {
 
       <div>
         <Button
+           id="botao-whatsapp"
           asChild 
           variant="default"
           className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
         >
           <a 
-            id="botao-whatsapp"
+           
             href="https://wa.me/351962703371" 
             target="_blank" 
             rel="noopener noreferrer"
