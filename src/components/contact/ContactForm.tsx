@@ -1,3 +1,4 @@
+// src/components/ContactForm.tsx
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -14,14 +15,13 @@ const ContactForm = () => {
         method="POST"
         className="space-y-4"
       >
-        {/* Redireciona para a página de obrigado após o envio */}
+        {/* Redirecionamento automático após envio */}
         <input
           type="hidden"
           name="_redirect"
           value="https://ctibericos.netlify.app/obrigado"
         />
 
-        {/* Campos do formulário */}
         <Input
           type="text"
           name="nome"
@@ -50,7 +50,6 @@ const ContactForm = () => {
           required
         />
 
-        {/* Botão de envio */}
         <Button
           type="submit"
           className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6"
@@ -63,3 +62,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
