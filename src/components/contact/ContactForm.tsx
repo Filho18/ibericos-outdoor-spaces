@@ -25,7 +25,7 @@ const ContactForm = () => {
       });
 
       if (response.ok) {
-        window.location.href = "https://ctibericos.netlify.app/obrigado";
+        window.location.href = "https://ctibericos.netlify.app/";
       } else {
         alert("Ocorreu um erro ao enviar. Tente novamente mais tarde.");
       }
