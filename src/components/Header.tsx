@@ -36,7 +36,7 @@ const Header = () => {
     >
       <div className="container-custom flex items-center justify-between">
         <div className="text-2xl font-heading font-semibold">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img 
               src="https://i.imgur.com/E6AwRuY.png" 
               alt="C.T.Ibéricos Logo" 
@@ -46,11 +46,13 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="hover-underline font-medium text-iberico-700">Home</a>
-          <a href="#about" className="hover-underline font-medium text-iberico-700">Sobre Nós</a>
-          <a href="#services" className="hover-underline font-medium text-iberico-700">Serviços</a>
-          <a href="#testimonials" className="hover-underline font-medium text-iberico-700">Testemunhos</a>
-          <a href="#contact" className="hover-underline font-medium text-iberico-700">Contacto</a>
+          <a href="/#home" className="hover-underline font-medium text-iberico-700">Home</a>
+          <a href="/#about" className="hover-underline font-medium text-iberico-700">Sobre Nós</a>
+          <a href="/#services" className="hover-underline font-medium text-iberico-700">Serviços</a>
+          <a href="/pergolas-bioclimaticas" className="hover-underline font-medium text-iberico-700">Pérgolas</a>
+          <a href="/toldos-cofres-motorizados" className="hover-underline font-medium text-iberico-700">Toldos</a>
+          <a href="/#testimonials" className="hover-underline font-medium text-iberico-700">Testemunhos</a>
+          <a href="/#contact" className="hover-underline font-medium text-iberico-700">Contacto</a>
         </nav>
 
         <div className="md:hidden">
@@ -69,35 +71,49 @@ const Header = () => {
           <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden">
             <div className="flex flex-col p-4 space-y-4">
               <a 
-                href="#home" 
+                href="/#home" 
                 className="px-4 py-2 hover:bg-muted rounded-md" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </a>
               <a 
-                href="#about" 
+                href="/#about" 
                 className="px-4 py-2 hover:bg-muted rounded-md" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Sobre Nós
               </a>
               <a 
-                href="#services" 
+                href="/#services" 
                 className="px-4 py-2 hover:bg-muted rounded-md" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Serviços
               </a>
               <a 
-                href="#testimonials" 
+                href="/pergolas-bioclimaticas" 
+                className="px-4 py-2 hover:bg-muted rounded-md" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Pérgolas
+              </a>
+              <a 
+                href="/toldos-cofres-motorizados" 
+                className="px-4 py-2 hover:bg-muted rounded-md" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Toldos
+              </a>
+              <a 
+                href="/#testimonials" 
                 className="px-4 py-2 hover:bg-muted rounded-md" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Testemunhos
               </a>
               <a 
-                href="#contact" 
+                href="/#contact" 
                 className="px-4 py-2 hover:bg-muted rounded-md" 
                 onClick={() => setMobileMenuOpen(false)}
               >
