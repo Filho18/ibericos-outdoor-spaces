@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import EmailButton from "@/components/EmailButton";
+import ContactSection from "@/components/ContactSection";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, Thermometer, Droplets, Sun, Wind } from "lucide-react";
 
@@ -40,7 +41,10 @@ const PergolasBioclimaticas = () => {
   ];
 
   const scrollToContact = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -185,6 +189,7 @@ const PergolasBioclimaticas = () => {
         </div>
       </section>
 
+      <ContactSection />
       <Footer />
       <EmailButton />
       <WhatsAppButton />
