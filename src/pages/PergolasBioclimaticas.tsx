@@ -83,7 +83,7 @@ const PergolasBioclimaticas = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                src="https://i.imgur.com/iUieITm.jpeg"
                 alt="Pérgola Bioclimática Moderna"
                 className="rounded-lg shadow-2xl w-full h-[400px] object-cover"
               />
@@ -149,7 +149,7 @@ const PergolasBioclimaticas = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80"
+                src="https://i.imgur.com/kDwg1Sf.jpeg"
                 alt="Pérgola com Sistema de Lâminas"
                 className="rounded-lg shadow-xl w-full h-[500px] object-cover"
               />
