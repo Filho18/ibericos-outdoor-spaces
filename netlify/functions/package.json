@@ -1,0 +1,9 @@
+{
+  "name": "netlify-functions",
+  "version": "1.0.0",
+  "main": "send-email.js",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.8"
+  }
+}
