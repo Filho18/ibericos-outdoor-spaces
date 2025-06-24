@@ -15,21 +15,34 @@ const ContactForm = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    // Converter FormData para objeto
+    const data = {
+      nome: formData.get("nome") as string,
+      email: formData.get("email") as string,
+      telefone: formData.get("telefone") as string,
+      assunto: formData.get("assunto") as string,
+      mensagem: formData.get("mensagem") as string,
+    };
+
     try {
-      const response = await fetch("https://formspree.io/f/mzzryezk", {
+      const response = await fetch("/.netlify/functions/send-email", {
         method: "POST",
-        body: formData,
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
+        // Redirecionar para a página de agradecimento existente
         window.location.href = "https://ctibericos.netlify.app";
       } else {
-        alert("Ocorreu um erro ao enviar. Tente novamente mais tarde.");
+        alert(result.message || "Ocorreu um erro ao enviar. Tente novamente mais tarde.");
       }
     } catch (error) {
+      console.error("Erro ao enviar:", error);
       alert("Erro de rede. Verifique a sua conexão.");
     } finally {
       setIsSending(false);
