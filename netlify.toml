@@ -1,7 +1,7 @@
 [build]
-  functions = "netlify/functions"
-  publish = "dist"
-  secrets_scan_omit_keys = ["EMAIL_TO"]
+functions = "netlify/functions"
+publish = "dist"
+secrets_scan_omit_keys = ["EMAIL_TO", "EMAIL_USER"]
 
 [build.environment]
-  NODE_VERSION = "18"
+NODE_VERSION = "18"
