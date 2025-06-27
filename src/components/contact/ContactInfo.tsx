@@ -44,8 +44,8 @@ const ContactInfo = () => {
         }
         title="Email"
       >
-        <a href="mailto:casadostoldos@gmail.com" className="text-iberico-600 hover:text-iberico-800 transition-colors">
-          casadostoldos@gmail.com
+        <a href="" className="text-iberico-600 hover:text-iberico-800 transition-colors">
+          
         </a>
       </ContactItem>
 
