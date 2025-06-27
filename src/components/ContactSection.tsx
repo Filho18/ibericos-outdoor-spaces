@@ -7,9 +7,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger
 } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, AlertTriangle } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,13 +55,6 @@ const ContactSection = () => {
             <p className="text-lg text-iberico-700 text-center mb-8">
               Tem alguma questão ou deseja solicitar um orçamento? Preencha o formulário e entraremos em contacto consigo brevemente, ou utilize um dos nossos outros canais de comunicação.
             </p>
-
-            <Alert className="mb-8 border-amber-200 bg-amber-50">
-              <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="text-amber-800">
-                <strong>Aviso da Equipa de T.I da CT Ibéricos:</strong> O formulário de contacto encontra-se temporariamente em manutenção. Pedimos desculpa pelo inconveniente e voltaremos com o serviço o mais brevemente possível. Entretanto, pode contactar-nos através dos nossos outros canais de comunicação disponíveis abaixo.
-              </AlertDescription>
-            </Alert>
 
             <div 
               className={`transition-all duration-300 ${
