@@ -52,7 +52,8 @@ exports.handler = async (event, context) => {
     // Configurar o e-mail
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER, // E-mail de destino
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      replyTo: email,
       subject: `Nova mensagem de ${nome} - ${assunto || "Ibericos Outdoor Spaces"}`,
       html: `
         <h2>Nova mensagem do site Ibericos Outdoor Spaces</h2>
@@ -93,5 +94,3 @@ exports.handler = async (event, context) => {
     };
   }
 };
-
-
