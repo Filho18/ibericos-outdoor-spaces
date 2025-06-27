@@ -53,6 +53,10 @@ const ContactSection = () => {
             </h2>
             <div className="h-1 w-20 bg-iberico-500 mb-6 mx-auto"></div>
 
+            <p className="text-lg text-iberico-700 text-center mb-8">
+              Tem alguma questão ou deseja solicitar um orçamento? Preencha o formulário e entraremos em contacto consigo brevemente, ou utilize um dos nossos outros canais de comunicação.
+            </p>
+
             <Alert className="mb-8 border-amber-200 bg-amber-50">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
               <AlertDescription className="text-amber-800">
