@@ -29,14 +29,14 @@ exports.handler = async (event, context) => {
   try {
     // Parse do corpo da requisição
     const body = JSON.parse(event.body);
-    const { nome, email, telefone, assunto, mensagem } = body;
+    const { firstName, lastName, phone, city, message, channel, subject } = body;
 
     // Validação básica
-    if (!nome || !email || !mensagem) {
+    if (!firstName || !lastName || !phone || !message) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "Campos obrigatórios: nome, email e mensagem" }),
+        body: JSON.stringify({ error: "Campos obrigatórios: nome, sobrenome, telefone e mensagem" }),
       };
     }
 
@@ -53,18 +53,18 @@ exports.handler = async (event, context) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `Nova mensagem de ${nome} - ${assunto || "Ibericos Outdoor Spaces"}`,
+      replyTo: process.env.EMAIL_USER,
+      subject: subject || `Orçamento Pérgola Bioclimática - ${firstName} ${lastName}`,
       html: `
-        <h2>Nova mensagem do site Ibericos Outdoor Spaces</h2>
-        <p><strong>Nome:</strong> ${nome}</p>
-        <p><strong>E-mail:</strong> ${email}</p>
-        ${telefone ? `<p><strong>Telefone:</strong> ${telefone}</p>` : ""}
-        ${assunto ? `<p><strong>Assunto:</strong> ${assunto}</p>` : ""}
+        <h2>Nova solicitação de orçamento - Pérgola Bioclimática</h2>
+        <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Telefone:</strong> ${phone}</p>
+        ${city ? `<p><strong>Cidade:</strong> ${city}</p>` : ""}
+        <p><strong>Canal preferido:</strong> ${channel === 'whatsapp' ? 'WhatsApp' : 'Email'}</p>
         <p><strong>Mensagem:</strong></p>
-        <p>${mensagem.replace(/\n/g, "<br>")}</p>
+        <p>${message.replace(/\n/g, "<br>")}</p>
         <hr>
-        <p><em>Mensagem enviada através do formulário de contato do site.</em></p>
+        <p><em>Solicitação enviada através da landing page de pérgolas bioclimáticas.</em></p>
       `,
     };
 

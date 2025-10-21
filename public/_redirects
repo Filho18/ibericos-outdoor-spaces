@@ -1,2 +1,6 @@
 
+# Landing page para orçamentos de pérgolas
+/pergolas-orcamento    /index.html   200
+
+# Fallback para todas as outras rotas
 /*    /index.html   200

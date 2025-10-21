@@ -51,6 +51,7 @@ const Header = () => {
           <a href="/#services" className="hover-underline font-medium text-iberico-700">Serviços</a>
           <a href="/pergolas-bioclimaticas" className="hover-underline font-medium text-iberico-700">Pérgolas</a>
           <a href="/toldos-cofres-motorizados" className="hover-underline font-medium text-iberico-700">Toldos</a>
+          <a href="/pergolas-orcamento" className="hover-underline font-medium text-iberico-700">Orçamento</a>
           <a href="/#testimonials" className="hover-underline font-medium text-iberico-700">Testemunhos</a>
           <a href="/#contact" className="hover-underline font-medium text-iberico-700">Contacto</a>
         </nav>
@@ -104,6 +105,13 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Toldos
+              </a>
+              <a 
+                href="/pergolas-orcamento" 
+                className="px-4 py-2 hover:bg-muted rounded-md" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Orçamento Pérgolas
               </a>
               <a 
                 href="/#testimonials" 
