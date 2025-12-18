@@ -142,7 +142,7 @@ const PergolasLanding = () => {
       <section 
         className="relative pt-32 pb-12 md:pt-40 md:pb-16"
         style={{
-          backgroundImage: 'url(https://i.imgur.com/iUieITm.jpeg)',
+          backgroundImage: 'url(https://i.imgur.com/kDwg1Sf.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
