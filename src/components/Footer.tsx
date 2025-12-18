@@ -50,7 +50,7 @@ const Footer = () => {
                 <a href="#services" className="text-iberico-300 hover:text-white transition-colors">Serviços</a>
               </li>
               <li>
-                <a href="/pergolas-orcamento" className="text-iberico-300 hover:text-white transition-colors">Orçamento Pérgolas</a>
+                <a href="/pergolas-orcamento" className="text-iberico-300 hover:text-white transition-colors">Pérgolas Bioclimáticas - Orçamento</a>
               </li>
               <li>
                 <a href="#testimonials" className="text-iberico-300 hover:text-white transition-colors">Testemunhos</a>
