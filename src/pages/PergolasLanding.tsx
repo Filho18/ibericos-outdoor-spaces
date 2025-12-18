@@ -1,48 +1,89 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MessageCircle, Mail, CheckCircle, XCircle } from "lucide-react";
+import { MessageCircle, Mail, ArrowLeft, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const PergolasLanding = () => {
-  const [userCity, setUserCity] = useState('Portugal');
-  const [selectedChannel, setSelectedChannel] = useState<'whatsapp' | 'gmail' | null>(null);
+  const [selectedChannel, setSelectedChannel] = useState<'whatsapp' | 'email' | null>(null);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
+    email: '',
     phone: '',
     city: '',
-    message: 'Saudações, gostaria de obter o orçamento de uma pérgola bioclimática.'
+    subject: 'Pérgolas Bioclimáticas',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Detectar localização do usuário
-  useEffect(() => {
-    const detectLocation = async () => {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        if (data.city) {
-          setUserCity(data.city);
-          setFormData(prev => ({ ...prev, city: data.city }));
-        }
-      } catch (error) {
-        console.log('Erro ao detectar localização:', error);
-        setUserCity('Portugal');
-      }
-    };
+  const testimonials = [
+    {
+      name: "António Ferreira",
+      location: "Lisboa",
+      text: "Excelente serviço! A pérgola ficou fantástica e a equipa foi muito profissional. Recomendo vivamente a CT Ibéricos."
+    },
+    {
+      name: "Carla Sousa",
+      location: "Faro",
+      text: "Desde o primeiro contacto até à instalação, tudo correu perfeitamente. Qualidade superior e preço justo."
+    },
+    {
+      name: "Miguel Santos",
+      location: "Leiria",
+      text: "Transformaram completamente o nosso terraço. Agora podemos usá-lo todo o ano, independentemente do tempo."
+    },
+    {
+      name: "Teresa Oliveira",
+      location: "Oeiras",
+      text: "Atendimento impecável e produto de alta qualidade. A pérgola bioclimática superou as nossas expectativas."
+    }
+  ];
 
-    detectLocation();
-  }, []);
+  const pergolaTypes = [
+    {
+      title: "Pérgola Autoportante",
+      description: "Estrutura independente, ideal para jardins e espaços amplos. Não necessita de apoio em paredes.",
+      image: "https://i.imgur.com/iUieITm.jpeg"
+    },
+    {
+      title: "Pérgola Adossada",
+      description: "Fixada à parede da casa, perfeita para terraços e varandas. Integra-se harmoniosamente com a construção.",
+      image: "https://i.imgur.com/kDwg1Sf.jpeg"
+    },
+    {
+      title: "Pérgola com Cortinas de Vidro",
+      description: "Proteção total contra vento e chuva. Transforma o espaço num ambiente fechado quando necessário.",
+      image: "https://i.imgur.com/iUieITm.jpeg"
+    },
+    {
+      title: "Pérgola Motorizada",
+      description: "Lâminas orientáveis controladas por motor. Ajuste perfeito da luz e ventilação com um toque.",
+      image: "https://i.imgur.com/kDwg1Sf.jpeg"
+    },
+    {
+      title: "Pérgola com Iluminação LED",
+      description: "Sistema de iluminação integrado para noites perfeitas. Crie ambientes únicos no seu espaço exterior.",
+      image: "https://i.imgur.com/iUieITm.jpeg"
+    }
+  ];
 
-  const handleChannelSelect = (channel: 'whatsapp' | 'gmail') => {
-    setSelectedChannel(channel);
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contacto-pergola');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -50,280 +91,385 @@ const PergolasLanding = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
 
-    try {
-      const response = await fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          channel: selectedChannel,
-          subject: `Orçamento Pérgola Bioclimática - ${formData.firstName} ${formData.lastName}`,
-        }),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          phone: '',
-          city: '',
-          message: 'Saudações, gostaria de obter o orçamento de uma pérgola bioclimática.'
-        });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
-      setSubmitStatus('error');
-    } finally {
+    if (selectedChannel === 'whatsapp') {
+      const message = encodeURIComponent(
+        `Olá! Gostaria de solicitar um orçamento.\n\nNome: ${formData.name}\nEmail: ${formData.email}\nTelefone: ${formData.phone}\nCidade: ${formData.city}\nAssunto: ${formData.subject}\nMensagem: ${formData.message}`
+      );
+      window.open(`https://wa.me/351962703371?text=${message}`, '_blank');
       setIsSubmitting(false);
+    } else {
+      try {
+        const response = await fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            channel: 'email',
+          }),
+        });
+
+        if (response.ok) {
+          alert('Mensagem enviada com sucesso!');
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            city: '',
+            subject: 'Pérgolas Bioclimáticas',
+            message: ''
+          });
+          setSelectedChannel(null);
+        } else {
+          alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+        }
+      } catch (error) {
+        console.error('Erro ao enviar formulário:', error);
+        alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Bloco 1 - Texto principal */}
-      <section className="pt-28 pb-16 md:pt-40 md:pb-24">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8 text-iberico-800">
-              Quanto custa instalar uma pérgola bioclimática em <span className="text-iberico-600">{userCity}</span>?
-            </h1>
+      {/* PergolaCtaSection - Hero/CTA */}
+      <section 
+        className="relative pt-32 pb-12 md:pt-40 md:pb-16"
+        style={{
+          backgroundImage: 'url(https://i.imgur.com/iUieITm.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="container-custom relative z-10">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Peça orçamento de <span className="text-iberico-300">Pérgola Bioclimática</span>
+              </h1>
+              <p className="text-xl text-white/90">Sem compromisso</p>
+            </div>
             
-            <div className="space-y-6 text-lg md:text-xl text-iberico-600 max-w-3xl mx-auto">
-              <p>
-                Em <strong>{userCity}</strong>, o valor médio de fornecimento e instalação de uma pérgola bioclimática pela CTIbéricos começa a partir de <span className="text-iberico-800 font-bold text-2xl">1.000 €</span>.
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+              <h2 className="text-2xl md:text-3xl font-semibold text-iberico-800 mb-4 text-center">
+                Receba um orçamento personalizado
+              </h2>
+              <p className="text-iberico-600 text-center mb-8">
+                e saiba exatamente qual é o valor de investimento do teu projeto
               </p>
-              
-              <p>
-                Claro que esse preço pode ser mais baixo ou mais alto, dependendo do tipo de estrutura, área disponível e necessidades específicas da sua casa ou estabelecimento.
-              </p>
-              
-              <p className="text-xl font-medium">
-                👉 Se quer saber quanto custaria exatamente no seu espaço, a CTIbéricos está a oferecer um <span className="text-green-600 font-bold">orçamento personalizado e gratuito</span>, sem compromisso — com resposta média em apenas <span className="text-blue-600 font-bold">15 a 20 minutos</span>.
-              </p>
+              <Button 
+                onClick={scrollToContact}
+                className="w-full bg-iberico-600 hover:bg-iberico-700 text-white py-6 text-lg font-medium"
+              >
+                Peça o seu orçamento
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bloco 2 - Pergunta de canal de atendimento */}
-      <section className="py-16 bg-gray-50">
+      {/* PergolaInfoSection - Benefícios */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="container-custom">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-iberico-800">
-              Onde gostaria de ser atendido?
-            </h2>
-            <p className="text-lg text-iberico-600 mb-12">
-              Escolha o canal mais prático para receber o seu orçamento personalizado.
+          <div className="max-w-4xl mx-auto">
+            <p className="text-center text-iberico-700 text-lg mb-8">
+              A nossa equipa foi treinada para prestar serviço de atendimento das <strong>06 às 22h</strong>, <strong>7 dias por semana</strong> até 31 de dezembro
             </p>
-
-            {!selectedChannel && (
-              <div className="flex flex-col md:flex-row gap-6 animate-fade-in">
-                <Button
-                  onClick={() => handleChannelSelect('whatsapp')}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg font-medium rounded-xl shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3"
-                >
-                  <MessageCircle className="h-6 w-6" />
-                  <span>WhatsApp</span>
-                </Button>
-                
-                <Button
-                  onClick={() => handleChannelSelect('gmail')}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-medium rounded-xl shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3"
-                >
-                  <Mail className="h-6 w-6" />
-                  <span>Gmail</span>
-                </Button>
+            
+            <div className="border-b border-gray-300 mb-8" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+              <div className="p-6 md:p-8 md:border-r border-gray-300">
+                <p className="text-iberico-700 text-center">
+                  Atendimento gratuito com uma equipa treinada para tirar as tuas dúvidas
+                </p>
               </div>
-            )}
+              <div className="p-6 md:p-8 md:border-r border-gray-300 border-t md:border-t-0">
+                <p className="text-iberico-700 text-center">
+                  Clareza de quanto custará o projeto incluindo a instalação
+                </p>
+              </div>
+              <div className="p-6 md:p-8 border-t md:border-t-0">
+                <p className="text-iberico-700 text-center">
+                  Em troca queremos ganhar reconhecimento e relacionamento dentro da Comunidade
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Formulário dinâmico */}
-            {selectedChannel && (
+      {/* PergolaTestimonialsSection - Testemunhos */}
+      <section className="py-16 md:py-20 bg-gray-50">
+        <div className="container-custom">
+          <h2 className="text-3xl md:text-4xl font-light text-gray-900 text-center mb-12">
+            Conquistamos Corações e Projetos
+          </h2>
+          
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/4">
+                  <div className="bg-white rounded-xl shadow-sm p-6 md:p-8 h-full">
+                    <div className="flex mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-amber-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-sm italic mb-4">
+                      "{testimonial.text}"
+                    </p>
+                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="text-gray-500 text-sm">{testimonial.location}</p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
+        </div>
+      </section>
+
+      {/* PergolaTypesSection - Tipos de Pérgola */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Tipos de Pérgola Bioclimática
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Descubra as diferentes opções disponíveis para transformar o seu espaço exterior
+            </p>
+          </div>
+          
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {pergolaTypes.map((type, index) => (
+                <CarouselItem key={index} className="basis-full">
+                  <div className="relative h-[300px] md:h-[450px] rounded-xl overflow-hidden">
+                    <img 
+                      src={type.image} 
+                      alt={type.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                        {type.title}
+                      </h3>
+                      <p className="text-white/90">
+                        {type.description}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+            
+            {/* Indicadores */}
+            <div className="flex justify-center gap-2 mt-6">
+              {pergolaTypes.map((_, index) => (
+                <div 
+                  key={index}
+                  className="w-2 h-2 rounded-full bg-muted-foreground/30"
+                />
+              ))}
+            </div>
+          </Carousel>
+        </div>
+      </section>
+
+      {/* PergolaContactSection - Formulário de Contacto */}
+      <section id="contacto-pergola" className="py-16 md:py-20 bg-gray-50">
+        <div className="container-custom">
+          <div className="max-w-xl mx-auto">
+            {!selectedChannel ? (
+              <div className="text-center animate-fade-in">
+                <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
+                  Onde preferes ser contactado?
+                </h2>
+                <p className="text-gray-600 mb-12">
+                  Escolha o seu método de contacto preferido
+                </p>
+                
+                <div className="flex flex-col gap-4">
+                  <Button
+                    onClick={() => setSelectedChannel('whatsapp')}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg font-medium relative"
+                  >
+                    <MessageCircle className="h-5 w-5 mr-2" />
+                    WhatsApp
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+                      Recomendado
+                    </span>
+                  </Button>
+                  
+                  <Button
+                    onClick={() => setSelectedChannel('email')}
+                    variant="outline"
+                    className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 py-6 text-lg font-medium"
+                  >
+                    <Mail className="h-5 w-5 mr-2" />
+                    Email
+                  </Button>
+                </div>
+              </div>
+            ) : (
               <div className="animate-fade-in">
+                <button
+                  onClick={() => setSelectedChannel(null)}
+                  className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Alterar método de contacto
+                </button>
+                
+                <div className="mb-6">
+                  <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                    selectedChannel === 'whatsapp' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    {selectedChannel === 'whatsapp' ? 'WhatsApp' : 'Email'}
+                  </span>
+                </div>
+                
+                <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+                  Entraremos em contacto em breve
+                </h2>
+                
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="firstName" className="block text-sm font-medium text-iberico-700 mb-2">
-                        Nome
-                      </label>
-                      <Input
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        required
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className="w-full"
-                        placeholder="O seu nome"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="lastName" className="block text-sm font-medium text-iberico-700 mb-2">
-                        Sobrenome
-                      </label>
-                      <Input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        required
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className="w-full"
-                        placeholder="O seu sobrenome"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-iberico-700 mb-2">
-                        Número de telefone
-                      </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full"
-                        placeholder="+351 XXX XXX XXX"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-iberico-700 mb-2">
-                        Cidade
-                      </label>
-                      <Input
-                        id="city"
-                        name="city"
-                        type="text"
-                        required
-                        value={formData.city}
-                        onChange={handleInputChange}
-                        className="w-full"
-                        placeholder="A sua cidade"
-                      />
-                    </div>
-                  </div>
-
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-iberico-700 mb-2">
-                      Mensagem
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nome Completo *
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      readOnly
-                      className="w-full bg-gray-50"
-                      rows={3}
+                    <Input
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Nome"
+                      className="w-full"
                     />
                   </div>
-
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email *
+                    </label>
+                    <Input
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="teuemail@email.com"
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Número de Telefone *
+                    </label>
+                    <Input
+                      name="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder=""
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Cidade *
+                    </label>
+                    <Input
+                      name="city"
+                      type="text"
+                      required
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      placeholder="Tua cidade"
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Assunto *
+                    </label>
+                    <Input
+                      name="subject"
+                      type="text"
+                      required
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-100"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Mensagem *
+                    </label>
+                    <Textarea
+                      name="message"
+                      required
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Descreve o teu projeto ou tua necessidade..."
+                      className="w-full"
+                      rows={4}
+                    />
+                  </div>
+                  
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-6 text-lg font-medium rounded-xl shadow-lg hover:scale-105 transition-all duration-300 ${
+                    className={`w-full py-6 text-lg font-medium ${
                       selectedChannel === 'whatsapp'
-                        ? 'bg-green-600 hover:bg-green-700 text-white'
-                        : 'bg-red-600 hover:bg-red-700 text-white'
-                    }`}
+                        ? 'bg-green-600 hover:bg-green-700'
+                        : 'bg-blue-600 hover:bg-blue-700'
+                    } text-white`}
                   >
                     {isSubmitting ? (
                       'A enviar...'
                     ) : selectedChannel === 'whatsapp' ? (
-                      'Enviar pedido via WhatsApp'
+                      'Enviar por WhatsApp'
                     ) : (
-                      'Receber orçamento por Gmail'
+                      'Enviar por Email'
                     )}
                   </Button>
                 </form>
-
-                {/* Status de envio */}
-                {submitStatus === 'success' && (
-                  <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3 animate-fade-in">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
-                    <p className="text-green-800 font-medium">
-                      ✅ Pedido enviado com sucesso! Um especialista da CTIbéricos entrará em contacto em breve.
-                    </p>
-                  </div>
-                )}
-
-                {submitStatus === 'error' && (
-                  <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3 animate-fade-in">
-                    <XCircle className="h-6 w-6 text-red-600" />
-                    <p className="text-red-800 font-medium">
-                      ❌ Ocorreu um erro ao enviar o pedido. Por favor, tente novamente.
-                    </p>
-                  </div>
-                )}
               </div>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Bloco 4 - Seção de confiança */}
-      <section className="py-16 bg-iberico-50">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            {/* Quem somos */}
-            <div className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-iberico-800 text-center">
-                Quem somos nós
-              </h2>
-              <div className="space-y-4 text-lg text-iberico-600 text-center">
-                <p>
-                  A CTIbéricos é uma empresa especializada em soluções de pérgolas bioclimáticas, toldos e coberturas inteligentes para residências e estabelecimentos comerciais em todo o território português.
-                </p>
-                <p>
-                  Com mais de 15 anos de experiência, unimos design, tecnologia e conforto para transformar espaços exteriores em áreas funcionais e elegantes.
-                </p>
-                <p>
-                  Atuamos com compromisso, rapidez e qualidade certificada — porque acreditamos que cada projeto deve refletir o estilo e o conforto de quem o vive.
-                </p>
-              </div>
-            </div>
-
-            {/* Testemunhos */}
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-iberico-800 text-center">
-                O que dizem os nossos clientes
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300">
-                  <p className="text-iberico-600 mb-4">
-                    "Instalação impecável, equipa super profissional."
-                  </p>
-                  <p className="text-iberico-800 font-medium">– Ana M., Lisboa</p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300">
-                  <p className="text-iberico-600 mb-4">
-                    "A pérgola ficou fantástica! Recomendo sem hesitar."
-                  </p>
-                  <p className="text-iberico-800 font-medium">– Ricardo P., Setúbal</p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300">
-                  <p className="text-iberico-600 mb-4">
-                    "Excelente relação qualidade-preço e atendimento rápido."
-                  </p>
-                  <p className="text-iberico-800 font-medium">– Carla D., Porto</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
