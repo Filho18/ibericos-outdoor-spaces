@@ -247,7 +247,7 @@ const PergolasLanding = () => {
 
       {/* PergolaTypesSection - Tipos de Pérgola */}
       <section className="py-16 md:py-24 bg-background">
-        <div className="container-custom">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Tipos de Pérgola Bioclimática
@@ -257,13 +257,14 @@ const PergolasLanding = () => {
             </p>
           </div>
           
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            className="w-full"
-          >
+          <div className="max-w-4xl mx-auto">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="w-full"
+            >
             <CarouselContent>
               {pergolaTypes.map((type, index) => (
                 <CarouselItem key={index} className="basis-full">
@@ -298,7 +299,8 @@ const PergolasLanding = () => {
                 />
               ))}
             </div>
-          </Carousel>
+            </Carousel>
+          </div>
         </div>
       </section>
 
