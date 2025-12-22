@@ -100,14 +100,24 @@ const PergolasLanding = () => {
       setIsSubmitting(false);
     } else {
       try {
+        // Separar nome em firstName e lastName para a função Netlify
+        const nameParts = formData.name.trim().split(' ');
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+        
         const response = await fetch('/.netlify/functions/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            ...formData,
+            firstName,
+            lastName,
+            phone: formData.phone,
+            city: formData.city,
+            message: formData.message,
             channel: 'email',
+            subject: formData.subject,
           }),
         });
 
