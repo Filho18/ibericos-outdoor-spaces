@@ -182,7 +182,7 @@ const PergolasLanding = () => {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <p className="text-center text-iberico-700 text-lg mb-8">
-              A nossa equipa foi treinada para prestar serviço de atendimento das <strong>06 às 22h</strong>, <strong>7 dias por semana</strong> até 31 de dezembro
+              A nossa equipa está treinada para prestar serviço de atendimento das <strong>9h às 20h</strong> de segunda a sexta-feira e das <strong>9h às 14h</strong> aos sábados.
             </p>
             
             <div className="border-b border-gray-300 mb-8" />
