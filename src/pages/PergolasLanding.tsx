@@ -154,9 +154,8 @@ const PergolasLanding = () => {
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Peça orçamento de <span className="text-iberico-300">Pérgola Bioclimática</span>
+                Peça orçamento da sua <span className="text-iberico-300">Pérgola Bioclimática</span>
               </h1>
-              <p className="text-xl text-white/90">Sem compromisso</p>
             </div>
             
             <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
