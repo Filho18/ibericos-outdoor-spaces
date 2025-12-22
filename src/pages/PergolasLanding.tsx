@@ -122,16 +122,8 @@ const PergolasLanding = () => {
         });
 
         if (response.ok) {
-          alert('Mensagem enviada com sucesso!');
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            city: '',
-            subject: 'Pérgolas Bioclimáticas',
-            message: ''
-          });
-          setSelectedChannel(null);
+          // Redirecionar para a página de agradecimento
+          window.location.href = "https://ctibericos.netlify.app";
         } else {
           alert('Erro ao enviar mensagem. Por favor, tente novamente.');
         }
