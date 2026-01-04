@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PergolasBioclimaticas from "./pages/PergolasBioclimaticas";
 import ToldosCofresMotorizados from "./pages/ToldosCofresMotorizados";
 import PergolasLanding from "./pages/PergolasLanding";
+import ToldosOrcamento from "./pages/ToldosOrcamento";
 import NotFound from "./pages/NotFound";
 import MetaTags from "./components/MetaTags";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/pergolas-bioclimaticas" element={<PergolasBioclimaticas />} />
           <Route path="/toldos-cofres-motorizados" element={<ToldosCofresMotorizados />} />
           <Route path="/pergolas-orcamento" element={<PergolasLanding />} />
+          <Route path="/toldos-orcamento" element={<ToldosOrcamento />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
