@@ -52,27 +52,27 @@ const PergolasLanding = () => {
     {
       title: "Pérgola Autoportante",
       description: "Estrutura independente, ideal para jardins e espaços amplos. Não necessita de apoio em paredes.",
-      image: "https://i.imgur.com/iUieITm.jpeg"
+      image: "https://i.imgur.com/6kZJIj2.jpeg"
     },
     {
       title: "Pérgola Adossada",
       description: "Fixada à parede da casa, perfeita para terraços e varandas. Integra-se harmoniosamente com a construção.",
-      image: "https://i.imgur.com/kDwg1Sf.jpeg"
+      image: "https://i.imgur.com/u8EXlXQ.jpeg"
     },
     {
       title: "Pérgola com Cortinas de Vidro",
       description: "Proteção total contra vento e chuva. Transforma o espaço num ambiente fechado quando necessário.",
-      image: "https://i.imgur.com/iUieITm.jpeg"
+      image: "https://i.imgur.com/sSE26Yq.jpeg"
     },
     {
-      title: "Pérgola Motorizada",
+      title: "Pérgola Bioclimática",
       description: "Lâminas orientáveis controladas por motor. Ajuste perfeito da luz e ventilação com um toque.",
-      image: "https://i.imgur.com/kDwg1Sf.jpeg"
+      image: "https://i.imgur.com/TsMINqd.jpeg"
     },
     {
       title: "Pérgola com Iluminação LED",
       description: "Sistema de iluminação integrado para noites perfeitas. Crie ambientes únicos no seu espaço exterior.",
-      image: "https://i.imgur.com/iUieITm.jpeg"
+      image: "https://i.imgur.com/ekAWo4A.jpeg"
     }
   ];
 
