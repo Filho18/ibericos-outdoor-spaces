@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"; // Correção para ESM (type: module)
+import nodemailer from "nodemailer";
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -13,11 +13,8 @@ exports.handler = async (event, context) => {
 
   try {
     const body = JSON.parse(event.body);
-    
-    // Mapeamento exato dos campos enviados pelo ContactForm.tsx
     const { nome, email, telefone, assunto, mensagem } = body;
 
-    // Validação dos campos obrigatórios conforme o formulário
     if (!nome || !email || !mensagem) {
       return {
         statusCode: 400,
@@ -37,21 +34,33 @@ exports.handler = async (event, context) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      replyTo: email, // Permite responder diretamente ao cliente
-      subject: assunto || `Novo Contacto Site - ${nome}`,
+      replyTo: email,
+      // Alterei o assunto para combinar com o novo título
+      subject: `Mais um futuro cliente Valmir - ${nome}`, 
       html: `
-        <div style="font-family: sans-serif; color: #333;">
-          <h2 style="color: #b01515;">Nova Mensagem - CT Ibéricos</h2>
-          <p><strong>Nome:</strong> ${nome}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Telefone:</strong> ${telefone || "Não fornecido"}</p>
-          <p><strong>Assunto:</strong> ${assunto || "Geral"}</p>
-          <p><strong>Mensagem:</strong></p>
-          <div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">
-            ${mensagem.replace(/\n/g, "<br>")}
+        <div style="font-family: sans-serif; color: #333; line-height: 1.6;">
+          <h2 style="color: #b01515; margin-bottom: 20px;">Mais um futuro cliente Valmir - Boa venda</h2>
+          
+          <div style="font-size: 16px;">
+            <p><strong>Nome:</strong> ${nome}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Telefone:</strong> ${telefone || "Não fornecido"}</p>
+            <p><strong>Assunto:</strong> ${assunto || "Geral"}</p>
+            <p><strong>Mensagem:</strong></p>
+            <div style="background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+              ${mensagem.replace(/\n/g, "<br>")}
+            </div>
           </div>
-          <hr>
-          <p style="font-size: 12px; color: #666;">Enviado via formulário ctibericos.xyz</p>
+
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+          
+          <p style="font-size: 11px; color: #555; margin: 0;">
+            <strong>manager:</strong> Dorivaldo Filho
+          </p>
+          
+          <p style="font-size: 10px; color: #999; margin-top: 5px;">
+            Enviado via formulário ctibericos.xyz
+          </p>
         </div>
       `,
     };
@@ -61,7 +70,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, message: "Email enviado com sucesso!" }),
+      body: JSON.stringify({ success: true, message: "Email enviado!" }),
     };
 
   } catch (error) {
