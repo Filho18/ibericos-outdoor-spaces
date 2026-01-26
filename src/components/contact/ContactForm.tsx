@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Phone, MessageCircle, AlertTriangle } from "lucide-react";
 
 const ContactForm = () => {
   const [isSending, setIsSending] = useState(false);
@@ -54,35 +52,6 @@ const ContactForm = () => {
       <h3 className="text-2xl font-semibold mb-6 text-iberico-800">
         Peça um Orçamento Ou Escreva a Sua Dúvida
       </h3>
-
-      <Alert variant="destructive" className="mb-6 border-amber-500 bg-amber-50">
-        <AlertTriangle className="h-5 w-5 text-amber-600" />
-        <AlertTitle className="text-amber-800 font-semibold">
-          ⚠️ Formulário em Manutenção
-        </AlertTitle>
-        <AlertDescription className="text-amber-700">
-          O formulário está temporariamente indisponível. Recomendamos contactar por chamada ou WhatsApp.
-        </AlertDescription>
-      </Alert>
-
-      <div className="flex gap-3 mb-6">
-        <a
-          href="tel:+351917851628"
-          className="flex-1 flex items-center justify-center gap-2 p-3 bg-iberico-50 hover:bg-iberico-100 rounded-lg border border-iberico-200 transition-colors"
-        >
-          <Phone className="h-5 w-5 text-iberico-600" />
-          <span className="text-sm font-medium text-iberico-700">Ligar</span>
-        </a>
-        <a
-          href="https://wa.me/351917851628?text=Olá! Gostaria de pedir um orçamento."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 p-3 bg-green-50 hover:bg-green-100 rounded-lg border border-green-200 transition-colors"
-        >
-          <MessageCircle className="h-5 w-5 text-green-600" />
-          <span className="text-sm font-medium text-green-700">WhatsApp</span>
-        </a>
-      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
