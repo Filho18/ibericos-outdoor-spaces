@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"; // Alterado para import devido ao type: module
+import nodemailer from "nodemailer"; // Correção para ESM (type: module)
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -11,31 +11,18 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: "" };
   }
 
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: "Método não permitido" }),
-    };
-  }
-
   try {
     const body = JSON.parse(event.body);
-    // Adicionei 'name' e 'email' para garantir compatibilidade com o que vejo na imagem
-    const { name, firstName, lastName, email, phone, city, message, channel, subject } = body;
+    
+    // Mapeamento exato dos campos enviados pelo ContactForm.tsx
+    const { nome, email, telefone, assunto, mensagem } = body;
 
-    // Log para você ver exatamente o que a função está recebendo do site
-    console.log("Dados recebidos:", body);
-
-    // Validação mais flexível: aceita 'name' completo ou 'firstName'
-    const finalFirstName = firstName || (name ? name.split(' ')[0] : "");
-    const finalLastName = lastName || (name ? name.split(' ').slice(1).join(' ') : "");
-
-    if (!finalFirstName || !phone || !message) {
+    // Validação dos campos obrigatórios conforme o formulário
+    if (!nome || !email || !mensagem) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "Campos obrigatórios: nome, telefone e mensagem" }),
+        body: JSON.stringify({ error: "Campos obrigatórios em falta." }),
       };
     }
 
@@ -50,19 +37,22 @@ exports.handler = async (event, context) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      replyTo: email || "", // Agora as respostas vão para o e-mail do cliente
-      subject: subject || `Orçamento Pérgola - ${finalFirstName} ${finalLastName}`,
+      replyTo: email, // Permite responder diretamente ao cliente
+      subject: assunto || `Novo Contacto Site - ${nome}`,
       html: `
-        <h2>Nova solicitação de orçamento - CT Ibéricos</h2>
-        <p><strong>Nome:</strong> ${finalFirstName} ${finalLastName}</p>
-        <p><strong>E-mail:</strong> ${email || "Não informado"}</p>
-        <p><strong>Telefone:</strong> ${phone}</p>
-        ${city ? `<p><strong>Cidade:</strong> ${city}</p>` : ""}
-        <p><strong>Canal preferido:</strong> ${channel === 'whatsapp' ? 'WhatsApp' : 'Email'}</p>
-        <p><strong>Mensagem:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
-        <hr>
-        <p><em>Enviado via Landing Page CT Ibéricos.</em></p>
+        <div style="font-family: sans-serif; color: #333;">
+          <h2 style="color: #b01515;">Nova Mensagem - CT Ibéricos</h2>
+          <p><strong>Nome:</strong> ${nome}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Telefone:</strong> ${telefone || "Não fornecido"}</p>
+          <p><strong>Assunto:</strong> ${assunto || "Geral"}</p>
+          <p><strong>Mensagem:</strong></p>
+          <div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">
+            ${mensagem.replace(/\n/g, "<br>")}
+          </div>
+          <hr>
+          <p style="font-size: 12px; color: #666;">Enviado via formulário ctibericos.xyz</p>
+        </div>
       `,
     };
 
@@ -71,21 +61,15 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ 
-        success: true, 
-        message: "E-mail enviado com sucesso!" 
-      }),
+      body: JSON.stringify({ success: true, message: "Email enviado com sucesso!" }),
     };
 
   } catch (error) {
-    console.error("ERRO DETALHADO:", error);
+    console.error("Erro na função:", error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        error: "Erro interno", 
-        details: error.message 
-      }),
+      body: JSON.stringify({ error: "Erro interno", details: error.message }),
     };
   }
 };
