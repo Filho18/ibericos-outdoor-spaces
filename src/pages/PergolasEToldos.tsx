@@ -73,8 +73,8 @@ const PergolasEToldos = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-gray-50">
-        <div className="container-custom max-w-2xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iberico-800 mb-4">
+        <div className="container-custom max-w-4xl mx-auto text-center">
+          <h1 className="text-[36px] font-semibold text-iberico-800 mb-4">
             Fabricamos e montamos todo tipo de toldos e Pérgolas Bioclimáticas.
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-iberico-600 mb-6">
