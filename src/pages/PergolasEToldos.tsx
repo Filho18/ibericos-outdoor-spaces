@@ -67,7 +67,7 @@ const PergolasEToldos = () => {
   const [userCity, setUserCity] = useState("Lisboa");
 
   useEffect(() => {
-    fetch("https://ip-api.com/json/?fields=city&lang=pt")
+    fetch("https://ipapi.co/json/")
       .then((res) => res.json())
       .then((data) => {
         if (data.city) setUserCity(data.city);
