@@ -10,6 +10,7 @@ import ToldosCofresMotorizados from "./pages/ToldosCofresMotorizados";
 import PergolasLanding from "./pages/PergolasLanding";
 import ToldosOrcamento from "./pages/ToldosOrcamento";
 import CoberturasOrcamento from "./pages/CoberturasOrcamento";
+import PergolasEToldos from "./pages/PergolasEToldos";
 import NotFound from "./pages/NotFound";
 import MetaTags from "./components/MetaTags";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/pergolas-orcamento" element={<PergolasLanding />} />
           <Route path="/toldos-orcamento" element={<ToldosOrcamento />} />
           <Route path="/coberturas-orcamento" element={<CoberturasOrcamento />} />
+          <Route path="/pergolas-e-toldos" element={<PergolasEToldos />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

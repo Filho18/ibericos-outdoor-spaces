@@ -59,6 +59,9 @@ const Footer = () => {
                 <a href="/coberturas-orcamento" className="text-iberico-300 hover:text-white transition-colors">Coberturas - Orçamento</a>
               </li>
               <li>
+                <a href="/pergolas-e-toldos" className="text-iberico-300 hover:text-white transition-colors">Pérgolas e Toldos</a>
+              </li>
+              <li>
                 <a href="#testimonials" className="text-iberico-300 hover:text-white transition-colors">Testemunhos</a>
               </li>
               <li>
