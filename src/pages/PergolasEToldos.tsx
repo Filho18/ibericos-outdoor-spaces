@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -63,6 +64,17 @@ const StarRating = () => (
 );
 
 const PergolasEToldos = () => {
+  const [userCity, setUserCity] = useState("Lisboa");
+
+  useEffect(() => {
+    fetch("https://ip-api.com/json/?fields=city&lang=pt")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.city) setUserCity(data.city);
+      })
+      .catch(() => {});
+  }, []);
+
   const scrollToForm = () => {
     document.getElementById("formulario")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -78,7 +90,7 @@ const PergolasEToldos = () => {
             Fabricamos e montamos todo tipo de toldos e Pérgolas Bioclimáticas.
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-iberico-600 mb-6">
-            Atendemos na sua cidade: Lisboa e Margem Sul.
+            Atendemos na sua cidade: {userCity} / Margem Sul.
           </h2>
           <p className="text-iberico-700 text-base md:text-lg mb-8 max-w-xl mx-auto">
             Clica em Pedir orçamento, preencha o formulário abaixo e a nossa equipa
