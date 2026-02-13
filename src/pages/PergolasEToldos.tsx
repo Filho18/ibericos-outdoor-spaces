@@ -90,7 +90,7 @@ const PergolasEToldos = () => {
             Fabricamos e montamos todo tipo de toldos e Pérgolas Bioclimáticas.
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-iberico-600 mb-6">
-            Atendemos na sua cidade: {userCity} / Margem Sul.
+            Atendemos na sua cidade: <span className="text-red-600 font-semibold">{userCity}</span> / <span className="text-red-600 font-semibold">Margem Sul</span>.
           </h2>
           <p className="text-iberico-700 text-base md:text-lg mb-8 max-w-xl mx-auto">
             Clica em Pedir orçamento, preencha o formulário abaixo e a nossa equipa
