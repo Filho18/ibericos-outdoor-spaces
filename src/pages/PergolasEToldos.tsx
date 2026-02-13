@@ -87,13 +87,13 @@ const PergolasEToldos = () => {
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-gray-50">
         <div className="container-custom max-w-[90%] md:max-w-4xl mx-auto text-center">
           <h1 className="text-[36px] leading-[45px] font-semibold text-iberico-800 mb-4">
-            Fabricamos e montamos todo tipo de toldos e Pérgolas Bioclimáticas.
+            Fabricamos e montamos todo tipo de toldos e pérgolas bioclimáticas à medida.
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-iberico-600 mb-6">
             Atendemos na sua cidade: <span className="text-red-600 font-semibold">{userCity}</span> / <span className="text-red-600 font-semibold">E Na Margem Sul</span>.
           </h2>
           <p className="text-iberico-700 text-base md:text-lg mb-8 max-w-xl mx-auto">
-            Clica em Pedir orçamento, preencha o formulário abaixo e a nossa equipa
+            Clica em Pedir orçamento, preenche o formulário abaixo e a nossa equipa
             vai entrar em contacto o mais breve possível.
           </p>
           <Button
@@ -112,7 +112,7 @@ const PergolasEToldos = () => {
             Quem somos nós
           </h2>
           <p className="text-iberico-700 text-lg leading-relaxed">
-            Nós somos a CT Ibéricos, uma empresa que contribui no mercado Português
+            Nós somos a CT Ibéricos, uma empresa que está presente no mercado português
             desde há 40 anos. Desenvolvemos projetos de toldos, pérgolas bioclimáticas,
             cortinas de vidro e estores de rolo para clientes residenciais e comerciais.
             Com uma equipa experiente e dedicada, garantimos qualidade, durabilidade e
