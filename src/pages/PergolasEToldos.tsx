@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -64,16 +64,6 @@ const StarRating = () => (
 );
 
 const PergolasEToldos = () => {
-  const [userCity, setUserCity] = useState("Lisboa");
-
-  useEffect(() => {
-    fetch("https://ipapi.co/json/?lang=pt")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.city) setUserCity(data.city);
-      })
-      .catch(() => {});
-  }, []);
 
   const scrollToForm = () => {
     document.getElementById("formulario")?.scrollIntoView({ behavior: "smooth" });
@@ -90,7 +80,7 @@ const PergolasEToldos = () => {
             Fabricamos e instalamos todo tipo de toldos e pérgolas bioclimáticas à medida.
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-iberico-600 mb-6">
-            Atendemos na sua cidade: <span className="text-red-600 font-semibold">{userCity}</span> / <span className="text-red-600 font-semibold">E Na Margem Sul</span>.
+            Atendemos em <span className="text-red-600 font-semibold">todo o território português</span>.
           </h2>
           <p className="text-iberico-700 text-base md:text-lg mb-8 max-w-xl mx-auto">
             Clica em Pedir orçamento, preenche o formulário abaixo e a nossa equipa
