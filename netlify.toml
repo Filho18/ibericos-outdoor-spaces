@@ -1,7 +1,14 @@
+# C.T.Ibéricos — site estático (HTML/CSS/JS) + função serverless de email
 [build]
-functions = "netlify/functions"
-publish = "dist"
-secrets_scan_omit_keys = ["EMAIL_TO", "EMAIL_USER"]
+  # Sem build step: o próprio repositório já é o site publicado (SSG puro).
+  # 'command' vazio/no-op sobrepõe qualquer build de React configurado na UI do Netlify.
+  command = "echo 'Site estático — sem build'"
+  publish = "."
+  functions = "netlify/functions"
 
-[build.environment]
-NODE_VERSION = "18"
+  # A função send-email lê estas chaves do ambiente — não são segredos a bloquear.
+  secrets_scan_omit_keys = ["EMAIL_TO", "EMAIL_USER"]
+
+[functions]
+  # Garante que o nodemailer é empacotado com a função.
+  node_bundler = "esbuild"

@@ -35,12 +35,11 @@ exports.handler = async (event, context) => {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER,
       replyTo: email,
-      // Alterei o assunto para combinar com o novo título
-      subject: `Mais um futuro cliente Valmir - ${nome}`, 
+      subject: `Mais um futuro cliente Valmir - ${nome}`,
       html: `
         <div style="font-family: sans-serif; color: #333; line-height: 1.6;">
           <h2 style="color: #b01515; margin-bottom: 20px;">Mais um futuro cliente Valmir - Boa venda</h2>
-          
+
           <div style="font-size: 16px;">
             <p><strong>Nome:</strong> ${nome}</p>
             <p><strong>Email:</strong> ${email}</p>
@@ -53,13 +52,13 @@ exports.handler = async (event, context) => {
           </div>
 
           <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-          
+
           <p style="font-size: 11px; color: #555; margin: 0;">
             <strong>manager:</strong> Dorivaldo Filho
           </p>
-          
+
           <p style="font-size: 10px; color: #999; margin-top: 5px;">
-            Enviado via formulário ctibericos.xyz
+            Enviado via formulário ctibericos.com
           </p>
         </div>
       `,

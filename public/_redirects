@@ -1,9 +1,0 @@
-
-# Landing page para orçamentos de pérgolas
-/pergolas-orcamento    /index.html   200
-
-# Landing page pérgolas e toldos
-/pergolas-e-toldos    /index.html   200
-
-# Fallback para todas as outras rotas
-/*    /index.html   200
