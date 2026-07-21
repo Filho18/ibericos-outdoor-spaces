@@ -148,7 +148,7 @@
         .then(function (res) {
           return res.json().then(function (result) {
             if (res.ok) {
-              window.location.href = "/";
+              window.location.href = "https://ctibericos.netlify.app/";
             } else {
               alert(result.message || result.error || "Ocorreu um erro ao enviar. Tente novamente mais tarde.");
             }
