@@ -6,8 +6,11 @@
   publish = "."
   functions = "netlify/functions"
 
-  # A função send-email lê estas chaves do ambiente — não são segredos a bloquear.
-  secrets_scan_omit_keys = ["EMAIL_TO", "EMAIL_USER"]
+[build.environment]
+  # O email casadostoldos@gmail.com é contacto público no site e é o valor de
+  # EMAIL_USER/EMAIL_TO — omitimos essas chaves do secrets scanning para não dar
+  # falso positivo. EMAIL_PASS (o segredo real) continua a ser scanneado.
+  SECRETS_SCAN_OMIT_KEYS = "EMAIL_USER,EMAIL_TO"
 
 [functions]
   # Garante que o nodemailer é empacotado com a função.
