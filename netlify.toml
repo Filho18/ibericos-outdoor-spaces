@@ -1,9 +1,10 @@
 # C.T.Ibéricos — site estático (HTML/CSS/JS) + função serverless de email
 [build]
-  # Sem build step: o próprio repositório já é o site publicado (SSG puro).
-  # 'command' vazio/no-op sobrepõe qualquer build de React configurado na UI do Netlify.
-  command = "echo 'Site estático — sem build'"
-  publish = "."
+  # Site estático (sem framework). O "build" apenas copia os ficheiros para dist/,
+  # porque a UI do Netlify (herança do antigo Vite/React) espera publish=dist.
+  # Assim funciona independentemente do que estiver configurado na UI.
+  command = "rm -rf dist && mkdir -p dist && cp -r index.html pergolas-e-toldos assets robots.txt sitemap.xml dist/"
+  publish = "dist"
   functions = "netlify/functions"
 
 [build.environment]
