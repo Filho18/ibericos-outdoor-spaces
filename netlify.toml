@@ -3,7 +3,7 @@
   # Site estático (sem framework). O "build" apenas copia os ficheiros para dist/,
   # porque a UI do Netlify (herança do antigo Vite/React) espera publish=dist.
   # Assim funciona independentemente do que estiver configurado na UI.
-  command = "rm -rf dist && mkdir -p dist && cp -r index.html pergolas-e-toldos assets robots.txt sitemap.xml dist/"
+  command = "rm -rf dist && mkdir -p dist && cp -r index.html pergolas-e-toldos toldos toldos-portugal toldos-motorizados toldos-varanda-terraco toldos-verticais toldos-retrateis toldos-esplanada toldos-loja assets robots.txt sitemap.xml dist/"
   publish = "dist"
   functions = "netlify/functions"
 
